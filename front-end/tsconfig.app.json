@@ -14,13 +14,22 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "preserve",
+    // 如果你打算在 Vue 中使用 TSX，请将 compilerOptions.jsx 设置为 "preserve"，并将 compilerOptions.jsxImportSource 设置为 "vue"。
+    "jsxImportSource": "vue",
 
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+
+    /* 自己加的 */
+    "composite": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mjs", "src/**/*.vue"]
 }
