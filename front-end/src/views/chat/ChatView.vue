@@ -1,15 +1,14 @@
-<!--
 <script lang="ts" setup>
 import { nextTick, onMounted, ref } from 'vue'
-import SessionItem from './components/session-item.vue'
+import SessionItem from './components/SessionItem.vue'
 import { ChatRound, Close, Delete, EditPen } from '@element-plus/icons-vue'
-import MessageRow from './components/message-row.vue'
-import MessageInput from './components/message-input.vue'
+import MessageRow from './components/MessageRow.vue'
+import MessageInput from './components/MessageInput.vue'
 import { storeToRefs } from 'pinia'
 import { ElIcon, ElMessage, type UploadProps, type UploadUserFile } from 'element-plus'
 import { api } from '@/utils/api-instance'
 import { SSE } from 'sse.js'
-import { type AiMessage, useChatStore } from './store/chat-store'
+import { type AiMessage, useChatStore } from '@/store/chat-store'
 import type { AiMessageParams, AiMessageWrapper } from '@/apis/__generated/model/static'
 
 type ChatResponse = {
@@ -149,15 +148,15 @@ const beforeUpload: UploadProps['beforeUpload'] = () => {
 const fileList = ref<UploadUserFile[]>([])
 </script>
 <template>
-  &lt;!&ndash; 最外层页面于窗口同宽，使聊天面板居中 &ndash;&gt;
+  <!-- 最外层页面于窗口同宽，使聊天面板居中 -->
   <div class="home-view">
-    &lt;!&ndash; 整个聊天面板 &ndash;&gt;
+    <!-- 整个聊天面板 -->
     <div class="chat-panel" v-loading="loading">
-      &lt;!&ndash; 左侧的会话列表 &ndash;&gt;
+      <!-- 左侧的会话列表 -->
       <div class="session-panel">
         <div class="title">AI助手</div>
         <div class="session-list" v-if="activeSession">
-          &lt;!&ndash; for循环遍历会话列表用会话组件显示，并监听点击事件和删除事件。点击时切换到被点击的会话，删除时从会话列表中提出被删除的会话。 &ndash;&gt;
+          <!-- for循环遍历会话列表用会话组件显示，并监听点击事件和删除事件。点击时切换到被点击的会话，删除时从会话列表中提出被删除的会话。 -->
           <session-item
               v-for="session in sessionList"
               :key="session.id"
@@ -178,39 +177,39 @@ const fileList = ref<UploadUserFile[]>([])
           </el-button>
         </div>
       </div>
-      &lt;!&ndash; 右侧的消息记录 &ndash;&gt;
+      <!-- 右侧的消息记录 -->
       <div class="message-panel">
-        &lt;!&ndash; 会话名称 &ndash;&gt;
+        <!-- 会话名称 -->
         <div class="header" v-if="activeSession">
           <div class="front">
-            &lt;!&ndash; 如果处于编辑状态则显示输入框让用户去修改 &ndash;&gt;
+            <!-- 如果处于编辑状态则显示输入框让用户去修改 -->
             <div v-if="isEdit" class="title">
-              &lt;!&ndash; 按回车代表确认修改 &ndash;&gt;
+              <!-- 按回车代表确认修改 -->
               <el-input
                   v-model="activeSession.name"
                   @keydown.enter="handleUpdateSession"
               ></el-input>
             </div>
-            &lt;!&ndash; 否则正常显示标题 &ndash;&gt;
+            <!-- 否则正常显示标题 -->
             <div v-else class="title">{{ activeSession.name }}</div>
             <div class="description">{{ activeSession.messages.length }}条对话</div>
           </div>
-          &lt;!&ndash; 尾部的编辑按钮 &ndash;&gt;
+          <!-- 尾部的编辑按钮 -->
           <div class="rear">
             <el-icon :size="20" style="margin-right: 10px">
               <Delete @click="handleClearMessage(activeSession.id)" />
             </el-icon>
             <el-icon :size="20">
-              &lt;!&ndash; 不处于编辑状态显示编辑按钮 &ndash;&gt;
+              <!-- 不处于编辑状态显示编辑按钮 -->
               <EditPen v-if="!isEdit" @click="isEdit = true" />
-              &lt;!&ndash; 处于编辑状态显示取消编辑按钮 &ndash;&gt;
+              <!-- 处于编辑状态显示取消编辑按钮 -->
               <Close v-else @click="isEdit = false"></Close>
             </el-icon>
           </div>
         </div>
         <el-divider :border-style="'solid'" />
         <div ref="messageListRef" class="message-list">
-          &lt;!&ndash; 过渡效果 &ndash;&gt;
+          <!-- 过渡效果 -->
           <transition-group name="list" v-if="activeSession">
             <message-row
                 v-for="message in activeSession.messages"
@@ -219,7 +218,7 @@ const fileList = ref<UploadUserFile[]>([])
             ></message-row>
           </transition-group>
         </div>
-        &lt;!&ndash; 监听发送事件 &ndash;&gt;
+        <!-- 监听发送事件 -->
         <message-input @send="handleSendMessage" v-if="activeSession"></message-input>
       </div>
       <div class="option-panel">
@@ -382,4 +381,4 @@ const fileList = ref<UploadUserFile[]>([])
     }
   }
 }
-</style>-->
+</style>
