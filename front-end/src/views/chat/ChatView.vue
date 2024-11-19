@@ -8,7 +8,7 @@ import { storeToRefs } from 'pinia'
 import { ElIcon, ElMessage, type UploadProps, type UploadUserFile } from 'element-plus'
 import { api } from '@/utils/api-instance'
 import { SSE } from 'sse.js'
-import { type AiMessage, useChatStore } from '@/store/chat-store'
+import { type AiMessage, useChatStore } from '@/store/chat_store'
 import type { AiMessageParams, AiMessageWrapper } from '@/apis/__generated/model/static'
 
 type ChatResponse = {
